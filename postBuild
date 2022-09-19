@@ -11,7 +11,7 @@ print("Preparing AFLOW SCHOOL environment")
 # folder setup
 print("  Creating Folders")
 bin_folder = Path("~/.local/bin")
-bin_folder.expanduser()
+bin_folder = bin_folder.expanduser().resolve()
 bin_folder.mkdir(parents=True, exist_ok=True)
 
 # binary setup
