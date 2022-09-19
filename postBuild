@@ -8,6 +8,14 @@ from pathlib import Path
 from urllib import request
 print("Preparing AFLOW SCHOOL environment")
 
+def run(*args, **kwargs):
+    # Run a command, echoing the args; fails hard if something goes wrong
+    print("\t", " ".join(args))
+    return_code = subprocess.call(args, **kwargs)
+    if return_code != 0:
+        print("\nERROR", return_code, " ".join(args))
+        sys.exit(return_code)
+
 # folder setup
 print("  Creating Folders")
 bin_folder = Path("~/.local/bin")
@@ -23,5 +31,8 @@ request.urlretrieve(aflow_prebuild_url, filename=aflow_path.absolute())
 aflow_data_path.touch()
 aflow_path.chmod(0o777)
 aflow_data_path.chmod(0o777)
+
+# test if install worked
+run('aflow', '--version', cwd='/tmp')
 
 print("Preparations done!")
