@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+# postBuild for AFLOW SCHOOL
+# download and setup aflow binary
+
+import subprocess
+import sys
+from pathlib import Path
+from urllib import request
+print("Preparing AFLOW SCHOOL environment")
+
+# folder setup
+print("  Creating Folders")
+bin_folder = Path("~/.local/bin")
+bin_folder.expanduser()
+bin_folder.mkdir(parents=True, exist_ok=True)
+
+# binary setup
+print("  Installing prebuild aflow")
+aflow_prebuild_url = "http://aflowlib.duke.edu/AFLOW_SCHOOL/AFLOW_BIN/aflow_3.2.13_ults18"
+aflow_path = bin_folder / "aflow"
+aflow_data_path = bin_folder / "aflow_data"
+request.urlretrieve(aflow_prebuild_url, filename=aflow_path.absolute())
+aflow_data_path.touch()
+aflow_path.chmod(0o777)
+aflow_data_path.chmod(0o777)
+
+print("Preparations done!")
