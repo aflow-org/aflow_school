@@ -12,9 +12,6 @@ dependencies:
   - jupyter-resource-usage
   - jupyterlab
   - jupyterhub-singleuser
-  # Newer versions require python 3.7
-  - nbconvert
-  # 6.4.0 conda package requires python 3.7
   - notebook
   - nteract_on_jupyter
 
