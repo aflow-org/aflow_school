@@ -1,3 +1,4 @@
 vim
 texlive-xetex
 texlive-latex-recommended
+texlive-fonts-recommended
