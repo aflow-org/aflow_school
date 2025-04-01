@@ -24,7 +24,7 @@ bin_folder.mkdir(parents=True, exist_ok=True)
 
 # binary setup
 print("  Installing prebuild aflow")
-aflow_prebuild_url = "http://aflowlib.duke.edu/AFLOW_SCHOOL/AFLOW_BIN/aflow_3.2.13_ults18"
+aflow_prebuild_url = "http://aflow.org/aflow_school/AFLOW_BIN/aflow_3.2.13_ults18"
 aflow_path = bin_folder / "aflow"
 aflow_data_path = bin_folder / "aflow_data"
 request.urlretrieve(aflow_prebuild_url, filename=aflow_path.absolute())
