@@ -6,6 +6,7 @@ import subprocess
 import sys
 from pathlib import Path
 from urllib import request
+import tarfile
 print("Preparing AFLOW SCHOOL environment")
 
 def run(*args, **kwargs):
@@ -29,19 +30,16 @@ setup_folder.mkdir(parents=True, exist_ok=True)
 
 # binary setup
 print("  Installing prebuild aflow")
-aflow_prebuild_url = "https://github.com/aflow-org/aflow/releases/download/v4.0.5/aflow-4.0.5-ubuntu24-amd64.sh"
+aflow_prebuild_url = "https://github.com/aflow-org/aflow/releases/download/v4.0.5/aflow-4.0.5-ubuntu22-amd64.tar.gz"
 aflow_path = bin_folder / "aflow"
 aflow_setup_path = setup_folder / "aflow.sh"
 print(f"    Downloading {aflow_prebuild_url} to {aflow_setup_path.absolute()}", flush=True)
 local_filename, headers = request.urlretrieve(aflow_prebuild_url, filename=aflow_setup_path.absolute())
-print(local_filename, flush=True)
-print(headers, flush=True)
+print("  Extracting aflow")
+with tarfile.open(local_filename, "r:gz") as tar:
+    tar.extract("aflow-4.0.5-Linux/bin/aflow", path=str(aflow_path.absolute()))
 aflow_setup_path.touch()
-aflow_setup_path.chmod(0o777)
-#
-# run("aflow.sh", "--skip-license", f"--prefix={bin_folder.absolute()}", cwd=str(setup_folder))
-#
-# # test if install worked
-# run('aflow', '--version', cwd='/tmp')
+aflow_path.chmod(0o777)
+local_filename.unlink()
 
 print("Preparations done!")
