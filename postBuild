@@ -10,7 +10,7 @@ print("Preparing AFLOW SCHOOL environment")
 
 def run(*args, **kwargs):
     # Run a command, echoing the args; fails hard if something goes wrong
-    print("\t", " ".join(args))
+    print("\t", " ".join(args), flush=True)
     return_code = subprocess.call(args, **kwargs)
     if return_code != 0:
         print("\nERROR", return_code, " ".join(args))
@@ -32,7 +32,9 @@ print("  Installing prebuild aflow")
 aflow_prebuild_url = "https://github.com/aflow-org/aflow/releases/download/v4.0.5/aflow-4.0.5-ubuntu24-amd64.sh"
 aflow_path = bin_folder / "aflow"
 aflow_setup_path = setup_folder / "aflow.sh"
+print(f"    Downloading {aflow_prebuild_url} to {aflow_setup_path.absolute()}")
 request.urlretrieve(aflow_prebuild_url, filename=aflow_setup_path.absolute())
+print(list(setup_folder.iterdir()))
 aflow_setup_path.touch()
 aflow_setup_path.chmod(0o777)
 
