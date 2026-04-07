@@ -2,11 +2,13 @@
 # postBuild for AFLOW SCHOOL
 # download and setup aflow binary
 
+import shutil
 import subprocess
 import sys
+import tarfile
 from pathlib import Path
 from urllib import request
-import tarfile
+
 print("Preparing AFLOW SCHOOL environment")
 
 def run(*args, **kwargs):
@@ -37,7 +39,9 @@ print(f"    Downloading {aflow_prebuild_url} to {aflow_setup_path.absolute()}", 
 local_filename, headers = request.urlretrieve(aflow_prebuild_url, filename=aflow_setup_path.absolute())
 print("  Extracting aflow")
 with tarfile.open(local_filename, "r:gz") as tar:
-    tar.extract("aflow-4.0.5-Linux/bin/aflow", path=str(aflow_path.absolute()))
+    member_file = tar.extractfile("aflow-4.0.5-Linux/bin/aflow")
+    with aflow_path.open("wb") as f:
+        shutil.copyfileobj(member_file, f)
 aflow_setup_path.touch()
 aflow_path.chmod(0o777)
 local_filename.unlink()
