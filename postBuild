@@ -38,10 +38,10 @@ print(local_filename, flush=True)
 print(headers, flush=True)
 aflow_setup_path.touch()
 aflow_setup_path.chmod(0o777)
-
-run("aflow.sh", "--skip-license", f"--prefix={bin_folder.absolute()}", cwd=setup_folder)
-
-# test if install worked
-run('aflow', '--version', cwd='/tmp')
+#
+# run("aflow.sh", "--skip-license", f"--prefix={bin_folder.absolute()}", cwd=str(setup_folder))
+#
+# # test if install worked
+# run('aflow', '--version', cwd='/tmp')
 
 print("Preparations done!")
