@@ -32,9 +32,10 @@ print("  Installing prebuild aflow")
 aflow_prebuild_url = "https://github.com/aflow-org/aflow/releases/download/v4.0.5/aflow-4.0.5-ubuntu24-amd64.sh"
 aflow_path = bin_folder / "aflow"
 aflow_setup_path = setup_folder / "aflow.sh"
-print(f"    Downloading {aflow_prebuild_url} to {aflow_setup_path.absolute()}")
-request.urlretrieve(aflow_prebuild_url, filename=aflow_setup_path.absolute())
-print(list(setup_folder.iterdir()))
+print(f"    Downloading {aflow_prebuild_url} to {aflow_setup_path.absolute()}", flush=True)
+local_filename, headers = request.urlretrieve(aflow_prebuild_url, filename=aflow_setup_path.absolute())
+print(local_filename, flush=True)
+print(headers, flush=True)
 aflow_setup_path.touch()
 aflow_setup_path.chmod(0o777)
 
